@@ -155,6 +155,7 @@ local connect = function(self, ws_url, ws_protocol, ssl_params)
   end
   if protocol == 'wss' then
     self.sock = ssl.wrap(self.sock, ssl_params)
+    self.sock:sni(host)
     local ret, err = self.sock:dohandshake()
     if not ret then
       return nil, err
